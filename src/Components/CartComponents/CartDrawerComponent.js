@@ -107,7 +107,8 @@ z-index: 100;
 `
 
 const CartDrawerComponent = ({openCart,setOpenCart}) => {
-    const navigate = useNavigate(); 
+    const navigate = useNavigate();
+    const [updateData, setUpdateData] = useState(true) 
     const [userId, setUserId] = useState("")
     const [cartProducts, setCartProducts] = useState([]);
     const [subTotal, setSubTotal] = useState(0)
@@ -166,6 +167,7 @@ const CartDrawerComponent = ({openCart,setOpenCart}) => {
     }
     useEffect(()=>{
         const fetchCartDetails = async() =>{
+          setUpdateData(false)
             try {
                 const response = await axios.get(`https://amazon-clone-backend-wofw.onrender.com/product/cartProducts/ids/${userId}`, {
                   withCredentials: true,
@@ -173,12 +175,13 @@ const CartDrawerComponent = ({openCart,setOpenCart}) => {
                 setSubTotal(response.data.subTotals)
                 setCartProducts(response.data.cartProducts)
                 console.log(response.data.cartProducts);
+                setUpdateData(true)
               } catch (error) {
         toast.error(error.response.data.message);
               }
           }
           fetchCartDetails();
-    },[openCart])
+    },[updateData])
     useEffect(() => {
         const handleClickOutside = (event) => {
           const cartDrawer = document.querySelector('.cart-drawer');
@@ -205,12 +208,13 @@ const CartDrawerComponent = ({openCart,setOpenCart}) => {
                 return {...rest, userId};
               });
               console.log(modifiedCartProducts);
-          const response = await axios.post("https://amazon-clone-backend-wofw.onrender.com/create-checkout-session", modifiedCartProducts)
-        const result = stripe.redirectToCheckout({
-            sessionId: response.data.id
-        })
-        console.log(result);
-    }
+              if(cartProducts.length !== 0){
+                const response = await axios.post("https://amazon-clone-backend-wofw.onrender.com/create-checkout-session", modifiedCartProducts)
+                const result = stripe.redirectToCheckout({
+                    sessionId: response.data.id
+                })      
+              }
+              }
         }catch(err){
            console.log(err);
            toast.error("Check Limit Reached! Plz buy less products at a time!")
