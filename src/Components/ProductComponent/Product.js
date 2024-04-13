@@ -193,7 +193,7 @@ const Product = ({setOpenCart}) => {
         const stripe = await loadStripe('pk_test_51OzdTnFshF4E0vp9xRvqldm12BpGBBWgQFqequ44ojV7wbahpToBdkSjHzqb96LaVPs2DYpgdzfuvFA1trzoDoBl002TL1h2XW');
         try{
             if(userType === "customer"){
-          const response = await axios.post("http://localhost:7001/create-buy-session",{
+          const response = await axios.post("https://amazon-clone-front-end-tawny.vercel.app/create-buy-session",{
             sellerId: productDetail.userId,
             userId: userId,
             productId: productID.id,
