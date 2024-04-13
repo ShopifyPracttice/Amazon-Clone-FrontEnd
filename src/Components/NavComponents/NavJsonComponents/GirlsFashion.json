@@ -1,0 +1,38 @@
+[
+    {
+        "titleName": "Clothing",
+        "link": "/"
+    },
+    {
+        "titleName": "Shoes",
+        "link": "/"
+    },
+    {
+        "titleName": "Jewelry",
+        "link": "/"
+    },
+    {
+        "titleName": "Watches",
+        "link": "/"
+    },
+    {
+        "titleName": "Accessories",
+        "link": "/"
+    },
+    {
+        "titleName": "School Uniforms",
+        "link":"/"
+    },
+    {
+        "titleName": "Women's Fashion",
+        "link": "/"
+    },
+    {
+        "titleName": "Men's Fashion",
+        "link": "/"
+    },
+    {
+        "titleName": "Boy's Fashion",
+        "link": "/"
+    }
+]

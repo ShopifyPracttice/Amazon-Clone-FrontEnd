@@ -1,0 +1,43 @@
+[
+    {
+        "titleName": "Movies",
+        "link": "/"
+    },
+    {
+        "titleName": "TV Shows",
+        "link": "/"
+    },
+    {
+        "titleName": "Blu-ray",
+        "link": "/"
+    },
+    {
+        "titleName": "4K Ultra HD",
+        "link": "/"
+    },
+    {
+        "titleName": "Best Sellers",
+        "link": "/"
+    },
+    {
+        "titleName": "Today's Deals",
+        "link":"/"
+    },
+    {
+        "titleName": "New Releases",
+        "link": "/"
+    },
+    {
+        "titleName": "Pre-orders",
+        "link": "/"
+    },
+    {
+        "titleName": "Kids & Family",
+        "link": "/"
+    },
+    {
+        "titleName": "Prime Video",
+        "link": "/"
+    }
+
+]
