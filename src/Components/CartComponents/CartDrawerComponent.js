@@ -181,7 +181,7 @@ const CartDrawerComponent = ({openCart,setOpenCart}) => {
               }
           }
           fetchCartDetails();
-    },[updateData])
+    },[updateData, openCart])
     useEffect(() => {
         const handleClickOutside = (event) => {
           const cartDrawer = document.querySelector('.cart-drawer');
