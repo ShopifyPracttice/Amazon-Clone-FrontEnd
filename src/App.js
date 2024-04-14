@@ -27,7 +27,7 @@ function App() {
     const fetchUserData = async () => {
 
       try {
-        const response = await axios.get('http://localhost:7001/user/validate-token', {
+        const response = await axios.get('https://amazon-clone-backend-wofw.onrender.com/user/validate-token', {
           withCredentials: true,
         });
 
