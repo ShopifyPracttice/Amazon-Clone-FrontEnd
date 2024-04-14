@@ -399,6 +399,9 @@ const Navbar = ({setOpenCart}) => {
                 {},
                 { withCredentials: true }
             );
+            setUserType("");
+        setUserName("");
+        setItemCounter(0);
             // Redirect to login page after successful logout
             navigate("/login/customer");
         } catch (error) {
