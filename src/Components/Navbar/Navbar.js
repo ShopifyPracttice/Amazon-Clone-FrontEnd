@@ -64,6 +64,8 @@ position: relative;
     }
     a{
         text-decoration: none;
+        color: black;
+        margin-left: 50px;
     }
     p{
         font-size: 14px;
@@ -390,7 +392,15 @@ const Navbar = ({setOpenCart}) => {
           document.removeEventListener("mousedown", handleClickOutside);
         };
       }, []);
-      
+       const signOut = async ()=>{
+        const response = await axios.post(`https://amazon-clone-backend-wofw.onrender.com/user/logout`,{
+            withCredentials: true,
+        });
+    
+        if(!response.ok){
+            toast.error("Error during sign out")
+        }
+    }
       const filterProducts = (search) => {
         // Filter by productName
         const filteredName = productTitles.filter(item => item.productName.toLowerCase().includes(search.toLowerCase()));
@@ -499,7 +509,7 @@ const Navbar = ({setOpenCart}) => {
                     </div>):(
                       <div>
                         {userType === "customer"? <Link to="/customer-account">Home</Link>: <p></p> }
-                         <button>Logout</button>
+                         <button onClick={signOut}>Logout</button>
                       </div>    
                     )}  
              </div>
