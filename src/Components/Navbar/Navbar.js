@@ -42,7 +42,8 @@ position: relative;
     display: grid;
 }
 .nav__sigin__hover__div{
-    display: none;
+    // display: none;
+    display: ${(props) => (props.signhover ? "grid" : "none")};
     position: absolute;
     top: 10%;
     left: 72%;
@@ -288,6 +289,7 @@ const selectOptions = [
 ]
 
 const Navbar = ({setOpenCart}) => {
+    const [signHover, setSignHover] = useState(false)
     const [productTitles, setProductsTitles] = useState([])
     const [displayOverlay, setDisplayOverlay] = useState(false)
     const [search, setSearch] = useState("")
@@ -368,6 +370,26 @@ const Navbar = ({setOpenCart}) => {
           document.removeEventListener("mousedown", handleClickOutside);
         };
       }, []);
+      useEffect(() => {
+        const handleClickOutside = (event) => {
+          const hoverSection = document.querySelector('.nav__sigin__hover__div');
+          const navSection = document.querySelector('.navbar__signIn');
+          
+          // Ensure inputSection and searchSection exist before accessing them
+          if (navSection?.contains(event.target) || hoverSection?.contains(event.target)) {
+            return;
+          }
+          
+          // Click occurred outside, close the overlay
+          setDisplayOverlay(false);
+        };
+      
+        document.addEventListener("mousedown", handleClickOutside);
+      
+        return () => {
+          document.removeEventListener("mousedown", handleClickOutside);
+        };
+      }, []);
       
       const filterProducts = (search) => {
         // Filter by productName
@@ -404,14 +426,15 @@ const Navbar = ({setOpenCart}) => {
         if (error === "Unauthorized") {
             navigate("/login/customer");
         } else if (userType === "customer") {
-            navigate("/customer-account");
+            // navigate("/customer-account");
+            setSignHover(true)
         } else if (userType === "business") {
             navigate("/business-account");
         }
     };
 
     return ( 
-        <NavbarComponent displayoverlay={displayOverlay} >
+        <NavbarComponent displayoverlay={displayOverlay} signhover={signHover}>
             <div className="overlay">
 
             </div>
