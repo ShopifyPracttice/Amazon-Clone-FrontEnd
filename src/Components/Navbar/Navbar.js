@@ -15,6 +15,32 @@ const NavbarComponent = styled.div`
 background: #131921;
 width: 100%;
 position: relative;
+.navbar__signIn{
+    width: 7.8%;
+    color: #fff;
+    margin-right: 10px;
+    // padding: 5px;
+    cursor: pointer;
+    border: 1px solid transparent;
+    position: relative;
+    p{
+        font-size: 12px;
+        margin-bottom: -6px;
+        margin-left: 2px;
+        height: 20px;
+        overflow: hidden;
+    }
+    h5{
+        margin-top: 6px;
+        margin-left: 2px;
+    }
+}
+.navbar__signIn:hover{
+    border: 1px solid #ddd;
+}
+.navbar__signIn:hover .nav__sigin__hover__div{
+    display: grid;
+}
 .nav__sigin__hover__div{
     display: none;
     position: absolute;
@@ -109,29 +135,6 @@ img{
     }
     color: #fff;
     padding: 20px;
-}
-.navbar__signIn{
-    width: 7.8%;
-    color: #fff;
-    margin-right: 10px;
-    // padding: 5px;
-    cursor: pointer;
-    border: 1px solid transparent;
-    position: relative;
-    p{
-        font-size: 12px;
-        margin-bottom: -6px;
-        margin-left: 2px;
-        height: 20px;
-        overflow: hidden;
-    }
-    h5{
-        margin-top: 6px;
-        margin-left: 2px;
-    }
-}
-.navbar__signIn:hover{
-    border: 1px solid #ddd;
 }
 
 .navbar__orders{
