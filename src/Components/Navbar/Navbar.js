@@ -361,7 +361,7 @@ const Navbar = ({setOpenCart}) => {
           }
           
           // Click occurred outside, close the overlay
-          setDisplayOverlay(false);
+          setSignHover(false);
         };
       
         document.addEventListener("mousedown", handleClickOutside);
@@ -498,7 +498,7 @@ const Navbar = ({setOpenCart}) => {
                         <p>New Customer <Link to="/register/customer-account">Start here</Link></p>
                     </div>):(
                       <div>
-                       
+                         <p>Logout</p>
                       </div>    
                     )}  
              </div>
