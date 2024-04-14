@@ -77,19 +77,11 @@ function App() {
           ):(
             <Route path='/business-account' element={<Navigate to="/" replace />}/>
           )}
-
-
-          {isAuthorized && isUserCustomer ?(
-            <Route path='/customer-account' element={<CustomerAccount/>}/>
-          ):(
-            <Route path='/customer-account' element={<Navigate to="/" replace />}/>
-          )}
-          {isAuthorized && isUserBusiness ?(
             <Route path="/business-account" element={<BusinessAccount />} />
-          ):(
-            <Route path='/business-account' element={<Navigate to="/" replace />}/>
-          )}
-          {!isAuthorized && <Route path='*' element={<Navigate to="/" replace />} />}
+
+<Route path='/customer-account' element={<CustomerAccount/>}/>
+
+          <Route path='*' element={<Navigate to="/" replace />} />
           
         </Routes>
       </BrowserRouter>
