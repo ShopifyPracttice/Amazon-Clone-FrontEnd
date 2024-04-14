@@ -136,7 +136,7 @@ const CartDrawerComponent = ({openCart,setOpenCart}) => {
                 setIsAuthorized(true);
               }
             } catch (error) {
-        toast.error(error.response.data.message);
+        // toast.error(error.response.data.message);
               setIsAuthorized(false);
             }
             // window.location.reload();

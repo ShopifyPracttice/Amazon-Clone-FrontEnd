@@ -4,7 +4,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import {ToastContainer} from 'react-toastify';
+import {ToastContainer, toast} from 'react-toastify';
 
 const HomeStyledComponent = styled.div`
 background: #e1e1e1;
@@ -54,7 +54,7 @@ background: #e1e1e1;
     height: 167vh;
     overflow: hidden;
     margin-top: -22%;
-    z-index: 20;
+    z-index: 10;
     display: grid;
     place-items: center;
     .product{
@@ -83,11 +83,15 @@ const HomeComponent = () => {
 
   useEffect(() => {
     const fetchProduct = async () => {
-      const response = await axios.get(
-        "https://amazon-clone-backend-wofw.onrender.com/product/all-products"
-      );
-      setProducts(response.data);
-      console.log(response);
+      try{
+        const response = await axios.get(
+          "https://amazon-clone-backend-wofw.onrender.com/product/all-products"
+        );
+        setProducts(response.data);
+      }catch(err){
+        console.log(err);
+        toast.error(err.response.data.message)
+      }
     };
     fetchProduct();
   }, []);

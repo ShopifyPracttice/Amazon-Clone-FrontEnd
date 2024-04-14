@@ -244,7 +244,7 @@ img{
     position: absolute;
     top: 75.8%;
     left: 30.4%;
-    z-index: 10;
+    z-index: 100;
     border-radius: 6px;
 }
 .search__result__name{
@@ -341,7 +341,7 @@ const Navbar = ({setOpenCart}) => {
                 setProductsTitles(response.data);   
             }
             catch(err){
-                console.log(err);
+                // console.log(err);
                  toast.error(err.response.data.message)
             }
         }
@@ -400,7 +400,7 @@ const Navbar = ({setOpenCart}) => {
     // const filteredBrand = productTitles.filter(item => item.productBrand.includes(search));
     // const filteredCategory = productTitles.filter(item => item.productCategory.includes(search));
     const handleSignInClicks = () => {
-        if (error === "Unauthorizedsss") {
+        if (error === "Unauthorized") {
             navigate("/login/customer");
         } else if (userType === "customer") {
             navigate("/customer-account");
