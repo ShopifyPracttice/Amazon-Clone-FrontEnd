@@ -414,7 +414,15 @@ const Navbar = ({setOpenCart}) => {
             });
             
             // Clear cookies on the client-side
-            document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+            const cookies = document.cookie.split(";");
+
+        // Loop through cookies to find the token cookie and remove it
+        cookies.forEach(cookie => {
+            const cookieName = cookie.split("=")[0].trim();
+            if (cookieName === "token") {
+                document.cookie = `${cookieName}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+            }
+        });
               
             // Reload the page
             // window.location.reload();
