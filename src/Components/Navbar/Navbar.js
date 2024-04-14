@@ -392,15 +392,21 @@ const Navbar = ({setOpenCart}) => {
           document.removeEventListener("mousedown", handleClickOutside);
         };
       }, []);
-       const signOut = async ()=>{
-        const response = await axios.post(`https://amazon-clone-backend-wofw.onrender.com/user/logout`,{
-            withCredentials: true,
-        });
-    
-        if(!response.ok){
-            toast.error("Error during sign out")
+      const signOut = async () => {
+        try {
+            await axios.post(
+                `https://amazon-clone-backend-wofw.onrender.com/user/logout`,
+                {},
+                { withCredentials: true }
+            );
+            // Redirect to login page after successful logout
+            navigate("/login/customer");
+        } catch (error) {
+            console.error("Error during sign out:", error);
+            toast.error("Error during sign out");
         }
-    }
+    };
+    
       const filterProducts = (search) => {
         // Filter by productName
         const filteredName = productTitles.filter(item => item.productName.toLowerCase().includes(search.toLowerCase()));
@@ -421,7 +427,7 @@ const Navbar = ({setOpenCart}) => {
         }
     };
     const filteredData = filterProducts(search);
-    console.log(filteredData);
+    // console.log(filteredData);
 
     //   const filteredData = productTitles.filter(item => 
     //     item.productName.toLowerCase().includes(search.toLowerCase()) || 
