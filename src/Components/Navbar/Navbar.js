@@ -394,16 +394,14 @@ const Navbar = ({setOpenCart}) => {
       }, []);
       const signOut = async () => {
         try {
-            await axios.post(
-                `https://amazon-clone-backend-wofw.onrender.com/user/logout`,
-                {},
-                { withCredentials: true }
-            );
+            await axios.get(
+                `https://amazon-clone-backend-wofw.onrender.com/user/logout` );
+                location.reload(true)
             setUserType("");
         setUserName("");
         setItemCounter(0);
             // Redirect to login page after successful logout
-            navigate("/login/customer");
+            // navigate("/login/customer");
         } catch (error) {
             console.error("Error during sign out:", error);
             toast.error("Error during sign out");
