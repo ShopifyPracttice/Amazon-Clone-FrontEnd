@@ -338,7 +338,7 @@ const Navbar = ({setOpenCart}) => {
     
         // Clean up setInterval when component unmounts or changes
         return () => clearInterval(intervalId);
-    }, [userType]);
+    });
     useEffect(()=>{
         const fetchProductData = async () => {
             try{
