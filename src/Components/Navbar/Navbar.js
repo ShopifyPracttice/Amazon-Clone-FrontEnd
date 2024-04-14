@@ -359,9 +359,9 @@ const Navbar = ({setOpenCart}) => {
           if (searchSection?.contains(event.target) || inputSection?.contains(event.target)) {
             return;
           }
+          setDisplayOverlay(false);
           
           // Click occurred outside, close the overlay
-          setSignHover(false);
         };
       
         document.addEventListener("mousedown", handleClickOutside);
@@ -379,9 +379,9 @@ const Navbar = ({setOpenCart}) => {
           if (navSection?.contains(event.target) || hoverSection?.contains(event.target)) {
             return;
           }
+          setSignHover(false);
           
           // Click occurred outside, close the overlay
-          setDisplayOverlay(false);
         };
       
         document.addEventListener("mousedown", handleClickOutside);
