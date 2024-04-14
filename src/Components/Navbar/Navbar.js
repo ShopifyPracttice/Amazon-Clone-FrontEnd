@@ -396,7 +396,7 @@ const Navbar = ({setOpenCart}) => {
         try {
             await axios.get(
                 `https://amazon-clone-backend-wofw.onrender.com/user/logout` );
-                location.reload(true)
+              window.location.reload()
             setUserType("");
         setUserName("");
         setItemCounter(0);
