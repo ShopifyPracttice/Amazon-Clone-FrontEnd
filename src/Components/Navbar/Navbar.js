@@ -409,20 +409,20 @@ const Navbar = ({setOpenCart}) => {
 
     const signOut = async () => {
         try {
-            await axios.get(`https://amazon-clone-backend-wofw.onrender.com/user/logout`, {
+           const response =  await axios.get(`https://amazon-clone-backend-wofw.onrender.com/user/logout`, {
                 withCredentials: true
             });
-            
+            console.log(response);
             // Clear cookies on the client-side
-            const cookies = document.cookie.split(";");
+        //     const cookies = document.cookie.split(";");
 
-        // Loop through cookies to find the token cookie and remove it
-        cookies.forEach(cookie => {
-            const cookieName = cookie.split("=")[0].trim();
-            if (cookieName === "token") {
-                document.cookie = `${cookieName}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
-            }
-        });
+        // // Loop through cookies to find the token cookie and remove it
+        // cookies.forEach(cookie => {
+        //     const cookieName = cookie.split("=")[0].trim();
+        //     if (cookieName === "token") {
+        //         document.cookie = `${cookieName}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+        //     }
+        // });
               
             // Reload the page
             // window.location.reload();
