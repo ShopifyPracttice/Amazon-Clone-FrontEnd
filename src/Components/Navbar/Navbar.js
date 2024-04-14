@@ -334,10 +334,10 @@ const Navbar = ({setOpenCart}) => {
         const pollingInterval = 5000; // 5 seconds
     
         // Set up polling using setInterval
-        // const intervalId = setInterval(fetchData, pollingInterval);
+        const intervalId = setInterval(fetchData, pollingInterval);
     
         // Clean up setInterval when component unmounts or changes
-        // return () => clearInterval(intervalId);
+        return () => clearInterval(intervalId);
     });
     useEffect(()=>{
         const fetchProductData = async () => {
@@ -392,45 +392,13 @@ const Navbar = ({setOpenCart}) => {
           document.removeEventListener("mousedown", handleClickOutside);
         };
       }, []);
-    //   const signOut = async () => {
-    //     try {
-    //         await axios.get('https://amazon-clone-backend-wofw.onrender.com/user/logout');
-    //           window.location.reload()
-    //     //     setUserType("");
-    //     // setUserName("");
-    //     // setItemCounter(0);
-    //         // Redirect to login page after successful logout
-    //         // navigate("/login/customer");
-    //     } catch (error) {
-    //         console.error("Error during sign out:", error);
-    //         toast.error("Error during sign out");
-    //     }
-    // };
 
     const signOut = async () => {
         try {
-           const response =  await axios.get(`https://amazon-clone-backend-wofw.onrender.com/user/logout`, {
+           await axios.get(`https://amazon-clone-backend-wofw.onrender.com/user/logout`, {
                 withCredentials: true
             });
-            console.log(response);
-            // Clear cookies on the client-side
-        //     const cookies = document.cookie.split(";");
-
-        // // Loop through cookies to find the token cookie and remove it
-        // cookies.forEach(cookie => {
-        //     const cookieName = cookie.split("=")[0].trim();
-        //     if (cookieName === "token") {
-        //         document.cookie = `${cookieName}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
-        //     }
-        // });
-              
-            // Reload the page
-            // window.location.reload();
-            
-            // Optionally reset state
-            // setUserType("");
-            // setUserName("");
-            // setItemCounter(0);
+              navigate("/login/customer")
         } catch (error) {
             console.error("Error during sign out:", error);
             toast.error("Error during sign out");
