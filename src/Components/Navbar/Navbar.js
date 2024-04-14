@@ -15,6 +15,33 @@ const NavbarComponent = styled.div`
 background: #131921;
 width: 100%;
 position: relative;
+.nav__sigin__hover__div{
+    display: none;
+    position: absolute;
+    top: 10%;
+    left: 72%;
+    height: 20%;
+    background: #fff;
+    box-shadow: -2px 6px 5px 0px rgba(196,177,177,0.75);
+-webkit-box-shadow: -2px 6px 5px 0px rgba(196,177,177,0.75);
+-moz-box-shadow: -2px 6px 5px 0px rgba(196,177,177,0.75);
+    width: 200px;
+    place-items: center;
+    button{
+        width: 100%;
+        background: #FFD814;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        padding: 6px;
+    }
+    a{
+        text-decoration: none;
+    }
+    p{
+        font-size: 14px;
+    }
+}
 .navbar{
     display: flex;
     align-items: center;
@@ -119,35 +146,6 @@ img{
         border: 1px solid #fff;
     }
 }
-.nav__sigin__hover__div{
-    display: none;
-    position: absolute;
-    top: 10%;
-    left: 72%;
-    height: 20%;
-    background: #fff;
-    box-shadow: -2px 6px 5px 0px rgba(196,177,177,0.75);
--webkit-box-shadow: -2px 6px 5px 0px rgba(196,177,177,0.75);
--moz-box-shadow: -2px 6px 5px 0px rgba(196,177,177,0.75);
-    width: 200px;
-    place-items: center;
-    button{
-        width: 100%;
-        background: #FFD814;
-        border: none;
-        outline: none;
-        cursor: pointer;
-        padding: 6px;
-    }
-    a{
-        text-decoration: none;
-    }
-    p{
-        font-size: 14px;
-    }
-}
-
-
 .navbar__orders{
     p{
         font-size: 12px;
