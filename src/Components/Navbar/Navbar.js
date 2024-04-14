@@ -409,13 +409,15 @@ const Navbar = ({setOpenCart}) => {
 
     const signOut = async () => {
         try {
-            await axios.get(`https://amazon-clone-backend-wofw.onrender.com/user/logout`);
+            await axios.get(`https://amazon-clone-backend-wofw.onrender.com/user/logout`, {
+                withCredentials: true
+            });
             
             // Clear cookies on the client-side
             document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
-            
+              
             // Reload the page
-            window.location.reload();
+            // window.location.reload();
             
             // Optionally reset state
             setUserType("");
