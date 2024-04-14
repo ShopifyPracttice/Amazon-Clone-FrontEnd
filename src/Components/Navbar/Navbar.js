@@ -334,10 +334,10 @@ const Navbar = ({setOpenCart}) => {
         const pollingInterval = 5000; // 5 seconds
     
         // Set up polling using setInterval
-        const intervalId = setInterval(fetchData, pollingInterval);
+        // const intervalId = setInterval(fetchData, pollingInterval);
     
         // Clean up setInterval when component unmounts or changes
-        return () => clearInterval(intervalId);
+        // return () => clearInterval(intervalId);
     });
     useEffect(()=>{
         const fetchProductData = async () => {
