@@ -45,9 +45,9 @@ position: relative;
     // display: none;
     display: ${(props) => (props.signhover ? "grid" : "none")};
     position: absolute;
-    top: 10%;
+    top: 50%;
     left: 72%;
-    height: 20%;
+    height: 100%;
     background: #fff;
     box-shadow: -2px 6px 5px 0px rgba(196,177,177,0.75);
 -webkit-box-shadow: -2px 6px 5px 0px rgba(196,177,177,0.75);
@@ -498,7 +498,7 @@ const Navbar = ({setOpenCart}) => {
                         <p>New Customer <Link to="/register/customer-account">Start here</Link></p>
                     </div>):(
                       <div>
-                         <p>Logout</p>
+                         <button>Logout</button>
                       </div>    
                     )}  
              </div>
