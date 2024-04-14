@@ -498,6 +498,7 @@ const Navbar = ({setOpenCart}) => {
                         <p>New Customer <Link to="/register/customer-account">Start here</Link></p>
                     </div>):(
                       <div>
+                        {userType === "customer"? <Link to="/customer-account">Home</Link>: <p></p> }
                          <button>Logout</button>
                       </div>    
                     )}  
