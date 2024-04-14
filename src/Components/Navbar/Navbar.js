@@ -420,9 +420,9 @@ const Navbar = ({setOpenCart}) => {
             // window.location.reload();
             
             // Optionally reset state
-            setUserType("");
-            setUserName("");
-            setItemCounter(0);
+            // setUserType("");
+            // setUserName("");
+            // setItemCounter(0);
         } catch (error) {
             console.error("Error during sign out:", error);
             toast.error("Error during sign out");
