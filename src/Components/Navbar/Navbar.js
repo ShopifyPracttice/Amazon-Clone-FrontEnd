@@ -392,15 +392,35 @@ const Navbar = ({setOpenCart}) => {
           document.removeEventListener("mousedown", handleClickOutside);
         };
       }, []);
-      const signOut = async () => {
+    //   const signOut = async () => {
+    //     try {
+    //         await axios.get('https://amazon-clone-backend-wofw.onrender.com/user/logout');
+    //           window.location.reload()
+    //     //     setUserType("");
+    //     // setUserName("");
+    //     // setItemCounter(0);
+    //         // Redirect to login page after successful logout
+    //         // navigate("/login/customer");
+    //     } catch (error) {
+    //         console.error("Error during sign out:", error);
+    //         toast.error("Error during sign out");
+    //     }
+    // };
+
+    const signOut = async () => {
         try {
-            await axios.get('https://amazon-clone-backend-wofw.onrender.com/user/logout');
-              window.location.reload()
-        //     setUserType("");
-        // setUserName("");
-        // setItemCounter(0);
-            // Redirect to login page after successful logout
-            // navigate("/login/customer");
+            await axios.get(`https://amazon-clone-backend-wofw.onrender.com/user/logout`);
+            
+            // Clear cookies on the client-side
+            document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+            
+            // Reload the page
+            window.location.reload();
+            
+            // Optionally reset state
+            setUserType("");
+            setUserName("");
+            setItemCounter(0);
         } catch (error) {
             console.error("Error during sign out:", error);
             toast.error("Error during sign out");
