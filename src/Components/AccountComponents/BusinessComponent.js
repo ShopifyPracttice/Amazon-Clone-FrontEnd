@@ -166,7 +166,7 @@ const BusinessComponent = () => {
     useEffect(()=>{
       const fetchCustomerID = async () => {
         try {
-            const response = await axios.get("http://localhost:7001/user/validate-token", {
+            const response = await axios.get("https://amazon-clone-backend-wofw.onrender.com/user/validate-token", {
                 withCredentials: true,
             });
             setUserId(response.data.userId)
@@ -188,7 +188,7 @@ const BusinessComponent = () => {
       const fetchOrderedProducts = async ()=>{
         try{
           if(userId){
-            const response = await axios.get(`http://localhost:7001/user/purchased-products/${userId}`)
+            const response = await axios.get(`https://amazon-clone-backend-wofw.onrender.com/user/purchased-products/${userId}`)
             console.log(response);
             setMyOrders(response.data)
             setTotalOrders(response.data.length)
