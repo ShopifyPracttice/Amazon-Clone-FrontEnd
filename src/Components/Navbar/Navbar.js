@@ -445,7 +445,8 @@ const Navbar = ({setOpenCart}) => {
             // navigate("/customer-account");
             setSignHover(true)
         } else if (userType === "business") {
-            navigate("/business-account");
+            setSignHover(true)
+
         }
     };
 
