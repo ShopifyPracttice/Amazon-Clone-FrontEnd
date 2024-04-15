@@ -196,7 +196,7 @@ const BusinessInfoComponent = () => {
             </div>
           </div>
         </form>
-        <form>
+        <form onSubmit={handleCreateBusinessAccount}>
           <h2>Business address</h2>
           <p>Have multiple locations? Use the address shown on official documents like tax forms.</p>
           <div style={{ display: "grid" }}>
@@ -248,7 +248,7 @@ const BusinessInfoComponent = () => {
             </select>
           </div>
         </form>
-        <button>{loading ? <Loader /> : "Create business account"}</button>
+        <button onClick={handleCreateBusinessAccount}>{loading ? <Loader /> : "Create business account"}</button>
         <span>By creating a business account, you agree to the <Link>Amazon Business Accounts Terms and Conditions.</Link>  You are creating a business account on behalf of the organization named above and agree you have authority to bind that organization.</span>
       </div>
     </BusinessInfoSectionComponent>
