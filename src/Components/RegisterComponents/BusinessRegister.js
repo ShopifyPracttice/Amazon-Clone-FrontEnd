@@ -3,6 +3,8 @@ import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import axios from "axios";
 import Loader from "../Loader/Loader";
+import {ToastContainer, toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const BusinessRegisterFormComponent = styled.div`
  width: 100%;
@@ -91,35 +93,38 @@ const BusinessRegisterForm = () => {
             } else {
                 setLoading(false)
                 setLoginResponse(response.data.message);
-
+                toast.error(response.data.message)
             }
         } catch (error) {
             setLoading(false)
-
-            console.error('Registration failed');
+            toast.error('Registration failed')
         }
     }
     return (
 
         <BusinessRegisterFormComponent>
-            <div style={{ display: loginResponse === "" ? "none" : "grid", fontSize: "24px", textAlign: "center", marginTop: "20px", background: "red", color: "#fff", placeItems: "center", width: "300px", height: "100px" }}>
+            {/* <div style={{ display: loginResponse === "" ? "none" : "grid", fontSize: "24px", textAlign: "center", marginTop: "20px", background: "red", color: "#fff", placeItems: "center", width: "300px", height: "100px" }}>
                 {loginResponse}
-            </div>
+            </div> */}
 
             <div className="business__register__account">
                 <div className="busines__register__email">
                     <h2>Let’s create your free Amazon Business account</h2>
                     <h4>Enter the email you'd like to use for your business account</h4>
+                    <form onSubmit={handleGetStartedClick}>
                     <input type="email" 
                     placeholder="Enter email" 
                     value={email} 
+                    required
                     onChange={(e) => {
                         setEmail(e.target.value);
                         setLoginResponse("")
                     }} />
-                    <button onClick={handleGetStartedClick}>{loading ? <Loader /> : "Get Started"}</button>
+                    <button>{loading ? <Loader /> : "Get Started"}</button>
+                    </form>
                     <span>Already an Amazon Business customer? <Link to="/login/business">Sign in</Link> </span>
                 </div>
+                <ToastContainer/>
                 <div className="business__register__info">
                     <h1>Added value for every type of organization</h1>
                     <div className="business__register__info__details">

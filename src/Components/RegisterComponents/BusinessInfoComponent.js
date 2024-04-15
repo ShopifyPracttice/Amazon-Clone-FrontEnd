@@ -4,6 +4,8 @@ import { useState } from "react";
 import Loader from "../Loader/Loader";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import {ToastContainer, toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const BusinessInfoSectionComponent = styled.div`
 width: 100%;
@@ -74,7 +76,6 @@ const BusinessInfoComponent = () => {
     state: "",
     businessType: ""
   });
-  console.log(formData.state);
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -97,6 +98,7 @@ const BusinessInfoComponent = () => {
         withCredentials: true,  
       });
       if (response.data.status === "OK") {
+        toast.success(response.data.message)
         navigate(`/`)
         setLoading(false)
         setFormData({
@@ -116,33 +118,33 @@ const BusinessInfoComponent = () => {
       } else {
         setLoading(false)
         setLoginResponse(response.data.message);
-
+         toast.error(response.data.message)
       }
     } catch (error) {
       setLoading(false)
-
-      console.error('Registration failed');
+      toast.error("Registration failed!")
     }
 
   }
   return (
     <BusinessInfoSectionComponent>
-      <div style={{ display: loginResponse === "" ? "none" : "grid", fontSize: "24px", textAlign: "center", marginTop: "20px", background: "red", color: "#fff", placeItems: "center", width: "300px", height: "100px" }}>
+      {/* <div style={{ display: loginResponse === "" ? "none" : "grid", fontSize: "24px", textAlign: "center", marginTop: "20px", background: "red", color: "#fff", placeItems: "center", width: "300px", height: "100px" }}>
         {loginResponse}
-      </div>
+      </div> */}
 
       <div className="business__info__page">
         <div className="business__info__page__details">
           <h1>Enter your business details</h1>
           <p>Tell us about you and your business so we can verify it. Please provide information per your official documents to get verified quicker.</p>
         </div>
-        <form>
+        <form onSubmit={handleCreateBusinessAccount}>
           <h2>Contact information</h2>
           <div style={{ display: "grid" }}>
             <label>First and last name</label>
             <input type="text"
               name="ownerName"
               value={formData.ownerName}
+              required
               onChange={handleChange} />
           </div>
           <div style={{ display: "grid" }}>
@@ -150,23 +152,27 @@ const BusinessInfoComponent = () => {
             <input type="text"
               name="businessPhone"
               value={formData.businessPhone}
-              onChange={handleChange} />
+              onChange={handleChange}
+              required />
           </div>
           <div style={{ display: "grid" }}>
             <label>Password</label>
             <input type="password"
               name="ownerPassword"
               value={formData.ownerPassword}
-              onChange={handleChange} />
+              onChange={handleChange}
+              required />
           </div>
         </form>
-        <form>
+        <ToastContainer/>
+        <form onSubmit={handleCreateBusinessAccount}>
           <h2>Business information</h2>
           <div style={{ display: "grid" }}>
             <label>Business name</label>
             <input type="text"
               name="businessName"
               value={formData.businessName}
+              required
               onChange={(e) => {
                 handleChange(e);
                 setLoginResponse("");
@@ -177,7 +183,8 @@ const BusinessInfoComponent = () => {
               <input type="radio"
                 name="businessType"
                 value="soleProprietorship"
-                onChange={handleRadioChange} />
+                onChange={handleRadioChange}
+                 />
               <label>Sole proprietorship (Not registered)</label>
             </div>
             <div style={{ display: "flex" }}>
@@ -197,6 +204,7 @@ const BusinessInfoComponent = () => {
             <input type="text"
               name="streetAdress"
               value={formData.streetAdress}
+              required
               onChange={handleChange}
             />
           </div>
@@ -214,6 +222,7 @@ const BusinessInfoComponent = () => {
               name="zipCode"
               value={formData.zipCode}
               onChange={handleChange}
+              required
             />
           </div>
           <div style={{ display: "grid" }}>
@@ -222,11 +231,12 @@ const BusinessInfoComponent = () => {
               name="city"
               value={formData.city}
               onChange={handleChange}
+              required
             />
           </div>
           <div style={{ display: "grid" }}>
             <label>State</label>
-            <select name="state" onChange={handleChange} value={formData.state}>
+            <select required name="state" onChange={handleChange} value={formData.state}>
               <option disabled hidden value>Select a state</option>
               <option value="AL">Alabama</option>
               <option value="AK">Alaska</option>
@@ -238,7 +248,7 @@ const BusinessInfoComponent = () => {
             </select>
           </div>
         </form>
-        <button onClick={handleCreateBusinessAccount}>{loading ? <Loader /> : "Create business account"}</button>
+        <button>{loading ? <Loader /> : "Create business account"}</button>
         <span>By creating a business account, you agree to the <Link>Amazon Business Accounts Terms and Conditions.</Link>  You are creating a business account on behalf of the organization named above and agree you have authority to bind that organization.</span>
       </div>
     </BusinessInfoSectionComponent>

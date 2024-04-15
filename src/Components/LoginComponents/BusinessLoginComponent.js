@@ -127,7 +127,7 @@ const BusinessLoginComponent = () => {
                {/* <div style={{  display: loginResponse === "" ? "none" : "grid", fontSize: "18px", fontWeight: "600" ,marginLeft: "80px", marginTop: "30px", marginBottom: "50px"  ,background: "red", color: "#fff", placeItems:"center", width: "200px", height:"60px"}}>
                   {loginResponse}
                </div> */}
-               <form>
+               <form onSubmit={handleBusinessLogin}>
                   <h2>Sign in</h2>
                   <label>Email</label>
                   <input type="email"
@@ -142,7 +142,7 @@ const BusinessLoginComponent = () => {
                   setLoginResponse("")
                 }}
                   required/>
-                  <button onClick={handleBusinessLogin}>{loading? <Loader/> : "Sign in"}</button>
+                  <button >{loading? <Loader/> : "Sign in"}</button>
             <ToastContainer />
                   <span>By continuing, you agree to Amazon's <Link>Conditions of Use</Link> and <Link>Privacy Notice.</Link> </span>
                </form>
