@@ -3,7 +3,7 @@ import styled from "styled-components";
 const RegisterNavComponent = styled.div`
 background: #001f3c;
 width: 100%;
-padding: 6px;
+// padding: 6px;
 height: 50px;
 display: flex;
 justify-content: space-around;
