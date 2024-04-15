@@ -1,5 +1,6 @@
 import styled from "styled-components"
 import AccountOption from "./AccountOptions";
+import { useNavigate } from "react-router-dom";
 
 const CustomerStyledComponent = styled.div`
 width: 100%;
@@ -24,17 +25,19 @@ place-items: center;
 `
 
 const CustomerComponent = () => {
+    const navigate = useNavigate()
     return (
         <CustomerStyledComponent>
             <div className="customer__account">
             <h1>Your Account</h1>
              <div className="customer__account__fields">
-              <AccountOption
+              <AccountOption 
               height="80px" 
               imgSrc="https://m.media-amazon.com/images/G/01/x-locale/cs/help/images/gateway/self-service/order._CB660668735_.png"
               altImg="order"
               title="Your Orders"
               description="Track, return, cancel an order, download invoice or buy again"
+              onClick={()=>navigate("/customer/order")}
               />
               <AccountOption
                height="80px"

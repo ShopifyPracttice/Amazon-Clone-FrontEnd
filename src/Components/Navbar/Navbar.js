@@ -65,7 +65,7 @@ position: relative;
     a{
         text-decoration: none;
         color: black;
-        margin-left: 50px;
+        // margin-left: 0px;
     }
     p{
         font-size: 14px;
@@ -508,11 +508,12 @@ const Navbar = ({setOpenCart}) => {
                    {
                     userType === "" ?(
                     <div>
-                        <Link to="/login/customer"><button>Sign in</button></Link>
-                        <p>New Customer <Link to="/register/customer-account">Start here</Link></p>
+                        {/* <Link to="/login/customer"><button>Sign in</button></Link>
+                        <p>New Customer <Link to="/register/customer-account">Start here</Link></p> */}
                     </div>):(
                       <div>
-                        {userType === "customer"? <Link to="/customer-account">Home</Link>: <p></p> }
+                        {userType === "customer"? <Link to="/customer-account">Your Account</Link>: <p></p> }
+                        {userType === "customer"? <Link to="/customer/order">Your Orders</Link>: <p></p> }
                          <button onClick={signOut}>Logout</button>
                       </div>    
                     )}  
