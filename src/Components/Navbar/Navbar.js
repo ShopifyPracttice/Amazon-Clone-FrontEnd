@@ -43,7 +43,7 @@ position: relative;
 }
 .nav__sigin__hover__div{
     // display: none;
-    display: ${(props) => (props.signhover ? "block" : "none")};
+    display: ${(props) => (props.signhover ? "grid" : "none")};
     position: absolute;
     top: 50%;
     left: 72%;
@@ -512,8 +512,8 @@ const Navbar = ({setOpenCart}) => {
                         <p>New Customer <Link to="/register/customer-account">Start here</Link></p> */}
                     </div>):(
                       <div>
-                        {userType === "customer"? <Link to="/customer-account">Your Account</Link>: <p></p> }
-                        {userType === "customer"? <Link to="/customer/order">Your Orders</Link>: <p></p> }
+                       <div> {userType === "customer"? <Link to="/customer-account">Your Account</Link>: <p></p> }</div>
+                       <div> {userType === "customer"? <Link to="/customer/order">Your Orders</Link>: <p></p> } </div>
                          <button onClick={signOut}>Logout</button>
                       </div>    
                     )}  
