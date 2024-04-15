@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import {ToastContainer, toast} from 'react-toastify';
+import { useNavigate } from "react-router-dom";
 
 const HomeStyledComponent = styled.div`
 background: #e1e1e1;
@@ -78,6 +79,7 @@ background: #e1e1e1;
 `;
 
 const HomeComponent = () => {
+  const navigate = useNavigate();
   const [products, setProducts] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -144,7 +146,7 @@ const HomeComponent = () => {
         <div className="home__products">
           <div className="product">
             {products.map((item)=>(
-                 <div key={item._id} className="classic__products">
+                 <div key={item._id} className="classic__products" onClick={()=> navigate("/all-products") }>
                     <h3>Deals in {item.productCategory}</h3>
                     <img src={item.productImage} alt={item.productName}/>
                  </div>
