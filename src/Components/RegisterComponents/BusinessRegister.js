@@ -13,7 +13,7 @@ const BusinessRegisterFormComponent = styled.div`
  .business__register__account{
     border: 1px solid #001f3c;
     display: flex;
-    width: 900px;
+    width: 80%;
     margin-top: 60px;
  }
  .busines__register__email{
