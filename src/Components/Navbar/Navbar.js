@@ -43,7 +43,7 @@ position: relative;
 }
 .nav__sigin__hover__div{
     // display: none;
-    display: ${(props) => (props.signhover ? "grid" : "none")};
+    display: ${(props) => (props.signhover ? "block" : "none")};
     position: absolute;
     top: 50%;
     left: 72%;
