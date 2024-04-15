@@ -7,7 +7,7 @@ import {ToastContainer, toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const BusinessRegisterFormComponent = styled.div`
- width: 100%;
+//  width: 100%;
  display: grid;
  place-items: center;
  .business__register__account{
@@ -20,6 +20,9 @@ const BusinessRegisterFormComponent = styled.div`
     display: block;
     padding: 20px;
     width: 50%;
+    form{
+        width: 100%;
+    }
     input{
         width: 97%;
         padding: 5px;
