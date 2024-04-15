@@ -71,16 +71,9 @@ function App() {
           <Route path="/register/business-account/:email" element={<BusinessInfo />} />
           <Route path="/register/business-account" element={<BusinessRegisterPage />} />
 
-          {isAuthorized && isUserBusiness ?(
           <Route path="/business/add-product" element={<AddProduct/>} />
-            
-          ):(
-            <Route path='/business-account' element={<Navigate to="/" replace />}/>
-          )}
-            <Route path="/business-account" element={<BusinessAccount />} />
-
-<Route path='/customer-account' element={<CustomerAccount/>}/>
-
+          <Route path="/business-account" element={<BusinessAccount />} />
+          <Route path='/customer-account' element={<CustomerAccount/>}/>
           <Route path='*' element={<Navigate to="/" replace />} />
           
         </Routes>
