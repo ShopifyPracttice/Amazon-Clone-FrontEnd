@@ -37,7 +37,7 @@ const CustomerComponent = () => {
               altImg="order"
               title="Your Orders"
               description="Track, return, cancel an order, download invoice or buy again"
-              onClick={()=>navigate("/customer/order")}
+              onClick={()=>{navigate("/customer/order")}}
               />
               <AccountOption
                height="80px"
