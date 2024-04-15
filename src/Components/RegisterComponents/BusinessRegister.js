@@ -20,9 +20,6 @@ const BusinessRegisterFormComponent = styled.div`
     display: block;
     padding: 20px;
     width: 50%;
-    form{
-        width: 100%;
-    }
     input{
         width: 97%;
         padding: 5px;
