@@ -65,6 +65,8 @@ position: relative;
     a{
         text-decoration: none;
         color: black;
+        line-height: 1.6;
+        padding: 10px;
         // margin-left: 0px;
     }
     p{
