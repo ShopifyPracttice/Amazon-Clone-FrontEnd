@@ -275,7 +275,7 @@ const Product = ({ setOpenCart }) => {
                         <h4>$121.41 Shipping & Import Fees Deposit to Pakistan Details</h4>
                         <span>In Stock</span>
                         {productDetail.productStock > 0 ? (
-                            <select value={productDetail.productStock} onChange={handleQuantityChange}>
+                            <select value={cartProducts.productQuantity} onChange={handleQuantityChange}>
                                 {[...Array(productDetail.productStock)].map((_, idx) => (
                                     <option key={idx + 1} value={idx + 1}>{idx + 1}</option>
                                 ))}
