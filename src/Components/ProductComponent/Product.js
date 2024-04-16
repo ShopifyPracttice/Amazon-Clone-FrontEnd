@@ -276,7 +276,7 @@ const Product = ({ setOpenCart }) => {
                         <span>In Stock</span>
                         {cartProducts.productQuantity > 0 ? (
                             <select value={cartProducts.productQuantity} onChange={handleQuantityChange}>
-                                {[...Array(cartProducts.productStock)].map((_, idx) => (
+                                {[...Array(cartProducts.productQuantity)].map((_, idx) => (
                                     <option key={idx + 1} value={idx + 1}>{idx + 1}</option>
                                 ))}
                             </select>
