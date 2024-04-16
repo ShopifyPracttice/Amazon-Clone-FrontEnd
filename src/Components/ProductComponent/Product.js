@@ -148,7 +148,7 @@ const Product = ({ setOpenCart }) => {
         };
         fetchCustomerID()
         fetchProductDetails();
-    }, [productID, fetchApiCall]);
+    }, [productID, fetchApiCall, productDetail.productStock]);
 
     const handleAddToCart = async (value) => {
         const price = cartProducts.productQuantity * value;
