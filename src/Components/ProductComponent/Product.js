@@ -94,6 +94,7 @@ const Product = ({ setOpenCart }) => {
     const navigate = useNavigate();
     const productID = useParams();
     let orderId;
+    const [fetchApiCall, setFetchApiCall] = useState(false)
     const [isLoading, setIsLoading] = useState(false)
     const [userType, setUserType] = useState("")
     const [userId, setUserId] = useState("")
@@ -147,11 +148,11 @@ const Product = ({ setOpenCart }) => {
         };
         fetchCustomerID()
         fetchProductDetails();
-    }, [productID]);
+    }, [productID, fetchApiCall]);
 
     const handleAddToCart = async (value) => {
         const price = cartProducts.productQuantity * value;
-
+        setFetchApiCall(true)
         try {
             if (userType === "customer") {
                 setIsLoading(true)
@@ -173,10 +174,12 @@ const Product = ({ setOpenCart }) => {
                 })
                 setIsLoading(false)
                 toast.success(response.data.message);
+                setFetchApiCall(false)
             }
         } catch (err) {
             console.log(err);
             setIsLoading(false)
+            setFetchApiCall(false)
             toast.error(err.response.data.message);
 
         }
