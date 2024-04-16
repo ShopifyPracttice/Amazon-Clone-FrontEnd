@@ -274,17 +274,17 @@ const Product = ({ setOpenCart }) => {
                         <h3>${productDetail.productPurchasePrice}</h3>
                         <h4>$121.41 Shipping & Import Fees Deposit to Pakistan Details</h4>
                         <span>In Stock</span>
-                        {cartProducts.productQuantity > 0 ? (
-                            <select value={cartProducts.productQuantity} onChange={handleQuantityChange}>
-                                {[...Array(cartProducts.productQuantity)].map((_, idx) => (
+                        {productDetail.productStock > 0 ? (
+                            <select value={productDetail.productStock} onChange={handleQuantityChange}>
+                                {[...Array(productDetail.productStock)].map((_, idx) => (
                                     <option key={idx + 1} value={idx + 1}>{idx + 1}</option>
                                 ))}
                             </select>
                         ) : (
                             <p>Out of Stock</p>
                         )}
-                        <button onClick={() => handleAddToCart(productDetail.productPurchasePrice)} disabled={userType === "" || userType === "business" ||cartProducts.productQuantity === 0}>{isLoading ? <Loader /> : "Add to Cart"}</button>
-                        <button disabled={cartProducts.productQuantity === 0} style={{ background: "#f90" }} onClick={() => handleBuyNow(productDetail.productPurchasePrice, productDetail._id)}>Buy Now</button>
+                        <button onClick={() => handleAddToCart(productDetail.productPurchasePrice)} disabled={userType === "" || userType === "business" || productDetail.productStock === 0}>{isLoading ? <Loader /> : "Add to Cart"}</button>
+                        <button disabled={productDetail.productStock === 0} style={{ background: "#f90" }} onClick={() => handleBuyNow(productDetail.productPurchasePrice, productDetail._id)}>Buy Now</button>
                         <ToastContainer />
                         <div style={{ display: "flex", justifyContent: "space-between" }}>
                             <p>Ship from</p>
