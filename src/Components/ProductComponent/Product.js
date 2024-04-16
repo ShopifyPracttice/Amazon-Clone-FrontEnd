@@ -7,7 +7,7 @@ import Loader from "../Loader/Loader";
 import React from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import {loadStripe} from '@stripe/stripe-js';
+import { loadStripe } from '@stripe/stripe-js';
 
 
 const ProductStyledComponent = styled.div`
@@ -90,7 +90,7 @@ justify-content: space-evenly;
 }
 `
 
-const Product = ({setOpenCart}) => {
+const Product = ({ setOpenCart }) => {
     const navigate = useNavigate();
     const productID = useParams();
     let orderId;
@@ -110,7 +110,7 @@ const Product = ({setOpenCart}) => {
         productSize: "",
         productImage: productDetail.productImage
     })
-    
+
     useEffect(() => {
         const fetchCustomerID = async () => {
             try {
@@ -120,176 +120,183 @@ const Product = ({setOpenCart}) => {
                 setUserId(response.data.userId)
                 setUserType(response.data.userType);
             } catch (error) {
-                if ( error.response.data.message === "Token expired") {
+                if (error.response.data.message === "Token expired") {
                     navigate("/login/customer")
-                } else if(error.response.data.message === "Unauthorized"){
+                } else if (error.response.data.message === "Unauthorized") {
                     console.log(error);
-        // toast.error(error.response.data.message);
+                    // toast.error(error.response.data.message);
 
-                }else{
+                } else {
                     console.log(error);
-        toast.error(error.response.data.message)
+                    toast.error(error.response.data.message)
 
                 }
             }
         };
 
-      const fetchProductDetails = async () => {
-        try {
-          const response = await axios.get(`https://amazon-clone-backend-wofw.onrender.com/product/product/id/${productID.id}`);
-          setProductDetail(response.data)
-          console.log(response);
-        } catch (err) {
-          console.error(err);
-        toast.error(err.response.data.message);
-          
-        }
-      };
-      fetchCustomerID()
-      fetchProductDetails();
-    },[productID]);
+        const fetchProductDetails = async () => {
+            try {
+                const response = await axios.get(`https://amazon-clone-backend-wofw.onrender.com/product/product/id/${productID.id}`);
+                setProductDetail(response.data)
+                console.log(response);
+            } catch (err) {
+                console.error(err);
+                toast.error(err.response.data.message);
 
-    const handleAddToCart = async (value) =>{
+            }
+        };
+        fetchCustomerID()
+        fetchProductDetails();
+    }, [productID]);
+
+    const handleAddToCart = async (value) => {
         const price = cartProducts.productQuantity * value;
-        
-           try{
-            if(userType === "customer"){
-              setIsLoading(true)
-            const response = await axios.put(`https://amazon-clone-backend-wofw.onrender.com/product`,{
-              userId: userId,
-              sellerId: productDetail.userId,
-              productId: productID.id,
-              productName: productDetail.productName,
-              productBrand: productDetail.productBrand,
-              productPrice: price,
-              productRetailPrice: productDetail.productRetailPrice,
-              productQuantity: cartProducts.productQuantity,
-              productColor: cartProducts.productColor,
-              productSize: cartProducts.productSize,
-              productImage: productDetail.productImage
-          });
-          setCartProducts({
-            productQuantity: 1
-          })
-          setIsLoading(false)
-        toast.success(response.data.message);
+
+        try {
+            if (userType === "customer") {
+                setIsLoading(true)
+                const response = await axios.put(`https://amazon-clone-backend-wofw.onrender.com/product`, {
+                    userId: userId,
+                    sellerId: productDetail.userId,
+                    productId: productID.id,
+                    productName: productDetail.productName,
+                    productBrand: productDetail.productBrand,
+                    productPrice: price,
+                    productRetailPrice: productDetail.productRetailPrice,
+                    productQuantity: cartProducts.productQuantity,
+                    productColor: cartProducts.productColor,
+                    productSize: cartProducts.productSize,
+                    productImage: productDetail.productImage
+                });
+                setCartProducts({
+                    productQuantity: 1
+                })
+                setIsLoading(false)
+                toast.success(response.data.message);
+            }
+        } catch (err) {
+            console.log(err);
+            setIsLoading(false)
+            toast.error(err.response.data.message);
+
         }
-           }catch (err){
-              console.log(err);
-          setIsLoading(false)
-        toast.error(err.response.data.message);
-          
-           }
-        }
+    }
     const handleQuantityChange = (event) => {
         const { value } = event.target;
         setCartProducts(prevState => ({
-          ...prevState,
-          productQuantity: parseInt(value) // Convert value to integer
+            ...prevState,
+            productQuantity: parseInt(value) // Convert value to integer
         }));
-      };
-      const handleBuyNow = async(value, orderID) =>{
+    };
+    const handleBuyNow = async (value, orderID) => {
         const price = cartProducts.productQuantity * value;
         const stripe = await loadStripe('pk_test_51OzdTnFshF4E0vp9xRvqldm12BpGBBWgQFqequ44ojV7wbahpToBdkSjHzqb96LaVPs2DYpgdzfuvFA1trzoDoBl002TL1h2XW');
-        try{
-            if(userType === "customer"){
-          const response = await axios.post("https://amazon-clone-backend-wofw.onrender.com/create-buy-session",{
-            sellerId: productDetail.userId,
-            userId: userId,
-            productId: productID.id,
-            productName: productDetail.productName,
-            productBrand: productDetail.productBrand,
-            productPrice: price,
-            productRetailPrice: productDetail.productRetailPrice,
-            productQuantity: cartProducts.productQuantity,
-            productColor: cartProducts.productColor,
-            productSize: cartProducts.productSize,
-            // productImage: productDetail.productImage
-        })
-        console.log(response);
-        const result = stripe.redirectToCheckout({
-            sessionId: response.data.id
-        })
-        console.log(result);
-    }
-        }catch(err){
-           console.log(err);
+        try {
+            if (userType === "customer") {
+                const response = await axios.post("https://amazon-clone-backend-wofw.onrender.com/create-buy-session", {
+                    sellerId: productDetail.userId,
+                    userId: userId,
+                    productId: productID.id,
+                    productName: productDetail.productName,
+                    productBrand: productDetail.productBrand,
+                    productPrice: price,
+                    productRetailPrice: productDetail.productRetailPrice,
+                    productQuantity: cartProducts.productQuantity,
+                    productColor: cartProducts.productColor,
+                    productSize: cartProducts.productSize,
+                    // productImage: productDetail.productImage
+                })
+                // console.log(response);
+                const result = stripe.redirectToCheckout({
+                    sessionId: response.data.id
+                })
+                // console.log(result);
+            }
+        } catch (err) {
+            console.log(err);
         }
-      }
+    }
 
-      
+
     return (
         <>
-        {productDetail.length === 0 && <ProductSkeleton/>}
-     { productDetail.length !==0 &&
-        <ProductStyledComponent usertype={userType}>
-            <img src={colorImages === "" ? productDetail.productImage : colorImages} alt={productDetail.productName}/>
-            <div className="product__details">
-                <h1>Brand:{productDetail.productBrand}</h1>
-                <h2>{productDetail.productName}</h2>
-                <h3>${productDetail.productPurchasePrice}</h3>
-                <h4>$121.41 Shipping & Import Fees Deposit to Pakistan Details</h4>
-                <h4>Available at a lower price from other sellers that may not offer free Prime shipping.</h4>
-                <p style={{display: productDetail.colors && productDetail.colors.length === 0 ? "none": "block"}}>Colors:</p>
-                <div className="product__colors">
-                    {productDetail.colors && productDetail.colors.map((color)=>(
-                        <div style={{padding: "5px" ,borderRadius: "50%",width: "20px", height: "20px",
-                        border: `1px solid ${cartProducts.productColor === color.color ? '#333' : '#ddd'}`
-                    }} onClick={() => setCartProducts(prevState => ({
-                            ...prevState,
-                            productColor: color.color // Update productColor with the selected size
-                          }))}>
-                        <div key={color._id} style={{background: color.color,cursor: "pointer" ,width: "20px", height: "20px", borderRadius: "50%"}} onClick={()=> setColorImages(color.image)}>   
+            {productDetail.length === 0 && <ProductSkeleton />}
+            {productDetail.length !== 0 &&
+                <ProductStyledComponent usertype={userType}>
+                    <img src={colorImages === "" ? productDetail.productImage : colorImages} alt={productDetail.productName} />
+                    <div className="product__details">
+                        <h1>Brand:{productDetail.productBrand}</h1>
+                        <h2>{productDetail.productName}</h2>
+                        <h3>${productDetail.productPurchasePrice}</h3>
+                        <h4>$121.41 Shipping & Import Fees Deposit to Pakistan Details</h4>
+                        <h4>Available at a lower price from other sellers that may not offer free Prime shipping.</h4>
+                        <p style={{ display: productDetail.colors && productDetail.colors.length === 0 ? "none" : "block" }}>Colors:</p>
+                        <div className="product__colors">
+                            {productDetail.colors && productDetail.colors.map((color) => (
+                                <div style={{
+                                    padding: "5px", borderRadius: "50%", width: "20px", height: "20px",
+                                    border: `1px solid ${cartProducts.productColor === color.color ? '#333' : '#ddd'}`
+                                }} onClick={() => setCartProducts(prevState => ({
+                                    ...prevState,
+                                    productColor: color.color // Update productColor with the selected size
+                                }))}>
+                                    <div key={color._id} style={{ background: color.color, cursor: "pointer", width: "20px", height: "20px", borderRadius: "50%" }} onClick={() => setColorImages(color.image)}>
+                                    </div>
+                                </div>
+                            ))}
                         </div>
+                        {productDetail.colors && productDetail.colors.some(color => color.size !== '') && (
+                            <>
+                                <p>Sizes:</p>
+                                <div className="product__size">
+                                    {productDetail.colors.map((color) => (
+                                        color.size !== '' && (
+
+                                            <div style={{
+                                                borderRadius: "20px", cursor: "pointer",
+                                                border: `1px solid ${cartProducts.productSize === color.size ? '#333' : '#ddd'}`
+
+                                                , padding: "10px"
+                                            }} onClick={() => setCartProducts(prevState => ({
+                                                ...prevState,
+                                                productSize: color.size
+                                            }))}>
+                                                {color.size}
+                                            </div>
+                                        )
+                                    ))}
+                                </div>
+                            </>
+                        )}
+
+                    </div>
+                    <div className="product__details__checkout">
+                        <h3>${productDetail.productPurchasePrice}</h3>
+                        <h4>$121.41 Shipping & Import Fees Deposit to Pakistan Details</h4>
+                        <span>In Stock</span>
+                        {cartProducts.productQuantity > 0 ? (
+                            <select value={cartProducts.productQuantity} onChange={handleQuantityChange}>
+                                {[...Array(cartProducts.productStock)].map((_, idx) => (
+                                    <option key={idx + 1} value={idx + 1}>{idx + 1}</option>
+                                ))}
+                            </select>
+                        ) : (
+                            <p>Out of Stock</p>
+                        )}
+                        <button onClick={() => handleAddToCart(productDetail.productPurchasePrice)} disabled={userType === "" || userType === "business" ||cartProducts.productQuantity === 0}>{isLoading ? <Loader /> : "Add to Cart"}</button>
+                        <button disabled={cartProducts.productQuantity === 0} style={{ background: "#f90" }} onClick={() => handleBuyNow(productDetail.productPurchasePrice, productDetail._id)}>Buy Now</button>
+                        <ToastContainer />
+                        <div style={{ display: "flex", justifyContent: "space-between" }}>
+                            <p>Ship from</p>
+                            <p>Amazon.com</p>
                         </div>
-                    ))}
-                </div>
-                {productDetail.colors && productDetail.colors.some(color => color.size !== '') && (
-  <>
-    <p>Sizes:</p>
-    <div className="product__size">
-      {productDetail.colors.map((color)=>(
-        color.size !== '' && (
-
-            <div style={{borderRadius: "20px", cursor: "pointer" ,
-            border: `1px solid ${cartProducts.productSize === color.size ? '#333' : '#ddd'}`
-              
-             , padding: "10px"}} onClick={() => setCartProducts(prevState => ({
-                ...prevState,
-                productSize: color.size 
-              }))}>
-                {color.size}   
-            </div>
-        )
-      ))}
-    </div>
-  </>
-)}
-
-            </div>
-            <div className="product__details__checkout">
-                <h3>${productDetail.productPurchasePrice}</h3>
-                <h4>$121.41 Shipping & Import Fees Deposit to Pakistan Details</h4>
-                <span>In Stock</span>
-                <select value={cartProducts.productQuantity} onChange={handleQuantityChange}>
-                {[...Array(productDetail.productStock)].map((_, idx) => (
-    <option key={idx + 1} value={idx + 1}>{idx + 1}</option>
-  ))}
-                </select>
-                <button onClick={()=>handleAddToCart(productDetail.productPurchasePrice)} disabled={userType ==="" || userType === "business"}>{isLoading ? <Loader/>:"Add to Cart"}</button>
-                <button style={{background: "#f90"}} onClick={()=>handleBuyNow(productDetail.productPurchasePrice, productDetail._id)}>Buy Now</button>
-                <ToastContainer />
-                <div style={{display: "flex", justifyContent: "space-between"}}>
-                    <p>Ship from</p>
-                    <p>Amazon.com</p>
-                </div>
-                <div style={{display: "flex", justifyContent: "space-between"}}>
-                    <p>Sold by</p>
-                    <p>Amazon.com</p>
-                </div>
-            </div>
-        </ProductStyledComponent>
-}
+                        <div style={{ display: "flex", justifyContent: "space-between" }}>
+                            <p>Sold by</p>
+                            <p>Amazon.com</p>
+                        </div>
+                    </div>
+                </ProductStyledComponent>
+            }
         </>
     );
 }
